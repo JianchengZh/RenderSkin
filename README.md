@@ -3,12 +3,14 @@ Renderskin is a JUCE based tool to prepare a set of animation frames into an int
 It depends on the following librarys:
 
 [RenderSkinLib](/dasdeck/RenderSkinLib)
+
 [D3CKCore](/dasdeck/D3CKCore)
+
 [D3CKInterface](/dasdeck/D3CKInterface)
 
 and of course.
 
-[/julianstorer/JUCE](julianstorer/JUCE)
+[JUCE](/julianstorer/JUCE)
 
 A little expereince with JUCE is a must if you want to build this tools for your self, premade binarys will be available soon!
 
