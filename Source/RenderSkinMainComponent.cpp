@@ -22,7 +22,7 @@ void RenderSkinMainComponent::changeListenerCallback(ChangeBroadcaster* obj)
 {
     if(obj == this->skin)
     {
-        int tab = this->tabs.getCurrentTabIndex();
+        int tab = jmax(0,this->tabs.getCurrentTabIndex());
         this->tabs.clearTabs();
         for(int i = 0 ; i < this->skin->getOpenSkins().size(); i++)
         {

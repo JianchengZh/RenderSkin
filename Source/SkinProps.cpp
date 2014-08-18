@@ -4,6 +4,7 @@
 #include "SkinGUI.h"
 #include "SkinPreviewGUI.h"
 #include "EditableSkin.h"
+#include "AudioProcessorSkin.h"
 
 SkinProps::SkinProps(EditableSkin* skin):
 name(skin),
@@ -15,6 +16,14 @@ targetPath("targetPath",skin->getTargetPath(),false,true,true,"*","","select fol
 	addAndMakeVisible(fitBoundsToImage);
 	addAndMakeVisible(test);
 	addAndMakeVisible(exportFile);
+    
+    addAndMakeVisible(loadPlugin);
+    loadPlugin.addListener(this);
+    loadPlugin.setButtonText("load plugin");
+    
+    addAndMakeVisible(showPlugin);
+    showPlugin.addListener(this);
+    showPlugin.setButtonText("show plugin");
     
     addAndMakeVisible(maskOpacity);
     maskOpacity.addListener(this);
@@ -59,6 +68,8 @@ targetPath("targetPath",skin->getTargetPath(),false,true,true,"*","","select fol
     format.setSelectedId(3);
     format.setEnabled(false);
     
+    pluginFormats.addDefaultFormats();
+    
     changeListenerCallback(skin);
 }
 
@@ -66,6 +77,9 @@ SkinProps::~SkinProps()
 {
     this->testWindow = nullptr; //close the window ahead of time to prevent clash with skin;
     this->testInstance = nullptr;
+    
+    pluginUI.deleteAndZero();
+    plugin = nullptr;
 }
 
 void SkinProps::resized()
@@ -103,6 +117,12 @@ void SkinProps::resized()
     
     exportFile.setBounds(x,y,w/2,ch);
     test.setBounds(exportFile.getRight(), y, w/2, ch);
+    y += ch;
+    
+    loadPlugin.setBounds(x, y, getWidth(), ch);
+    
+    y+= ch;
+    showPlugin.setBounds(x, y, getWidth(), ch);
 }
 
 void SkinProps::filenameComponentChanged (FilenameComponent* fileComponentThatHasChanged)
@@ -162,7 +182,7 @@ void SkinProps::buttonClicked(Button* button)
                 skin->createSkin(this->targetPath.getCurrentFile(),*iformat);
             }
             
-            this->testInstance = new Skin();
+            this->testInstance = this->plugin ? new AudioProcessorSkin(this->plugin) : new Skin();
             
             ImageCache::releaseUnusedImages();
             
@@ -192,11 +212,97 @@ void SkinProps::buttonClicked(Button* button)
         if(this->previewWindow == nullptr)
         {
             SkinGUI* g = new SkinPreviewGUI(this->skin);
-            //g->setScale(this->getScale());
             this->previewWindow = new RenderSkinPreviewWindow(g,this->previewWindow);
         }
         this->previewWindow->setVisible(true);
         this->previewWindow->toFront(true);
+    }
+    else if(button == &this->loadPlugin)
+    {
+        PopupMenu menu;
+        menu.addItem(1, "open...");
+        this->knownPlugins.addToMenu(menu, KnownPluginList::sortByManufacturer);
+        int res = menu.show();
+        if(res == 1)
+        {
+            WildcardFileFilter wildcardFilter ("*.vst", String::empty, "vst files");
+            FileBrowserComponent browser (FileBrowserComponent::canSelectDirectories | FileBrowserComponent::openMode,
+                                          File("~/Library/Audio"),
+                                          &wildcardFilter,
+                                          nullptr);
+            FileChooserDialogBox dialogBox ("Open vst file",
+                                            "Please choose some vst you want to open...",
+                                            browser,
+                                            false,
+                                            Colours::lightgrey);
+            if (dialogBox.show())
+            {
+                File selectedFile = browser.getSelectedFile(0);
+                StringArray files;
+                files.add(selectedFile.getFullPathName());
+                OwnedArray<PluginDescription> types;
+                this->knownPlugins.scanAndAddDragAndDroppedFiles(this->pluginFormats, files, types);
+                if(types.size() == 1)
+                {
+                    this->createPlugin(types.getFirst());
+                }
+            }
+        }
+        else
+        {
+            int index = this->knownPlugins.getIndexChosenByMenu(res);
+            PluginDescription* desc = this->knownPlugins.getType(index);
+            if(desc)
+            {
+                this->createPlugin(desc);
+            }
+        }
+    }
+    else
+    {
+        this->openPluginEditor();
+    }
+}
+
+void SkinProps::clearPlugin()
+{
+    if(this->plugin)
+    {
+        this->plugin->releaseResources();
+        this->plugin = nullptr;
+    }
+}
+
+void SkinProps::openPluginEditor()
+{
+    if(this->plugin)
+    {
+        if(!this->pluginUI)
+        {
+            this->pluginUI = new PluginWindow(this->plugin->createEditorIfNeeded());
+        }
+        this->pluginUI->setVisible(true);
+        this->pluginUI->toFront(true);
+    }
+}
+
+void SkinProps::createPlugin(PluginDescription* desc)
+{
+    String errors;
+    
+    this->clearPlugin();
+    
+    double sampleRate = 44100;
+    int numChannels = 2;
+    int bufferSize = 128;
+    
+    this->plugin = this->pluginFormats.createPluginInstance(*desc, sampleRate, bufferSize, errors);
+    if(this->plugin)
+    {
+        this->plugin->setPlayConfigDetails(numChannels, numChannels, sampleRate, bufferSize);
+        this->plugin->prepareToPlay(sampleRate, bufferSize);
+        
+        this->openPluginEditor();
     }
 }
 
@@ -220,6 +326,26 @@ void SkinProps::sliderValueChanged(Slider*slider)
     else if(slider == &this->maskOpacity )
     {
         this->skin->maskOpacity = slider->getValue();
-        
     }
+}
+
+PluginWindow::PluginWindow(Component* ed,bool owned):
+DocumentWindow(ProjectInfo::projectName,Colours::white,DocumentWindow::allButtons)
+{
+    if(owned)
+    {
+        this->setContentOwned(ed, true);
+    }
+    else
+    {
+        this->setContentNonOwned(ed,true);
+    }
+}
+PluginWindow::~PluginWindow()
+{
+}
+
+void PluginWindow::closeButtonPressed()
+{
+    delete this;
 }

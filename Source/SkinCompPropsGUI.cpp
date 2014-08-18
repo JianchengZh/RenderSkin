@@ -2,7 +2,7 @@
 #include "EditableSkinComp.h"
 #include "EditableSkin.h"
 #include "SkinPlacementRect.h"
-#include "ShottyLook.h"
+//#include "ShottyLook.h"
 #include "EditableSkinComp.h"
 
 SkinCompPropsGUI::SkinCompPropsGUI(EditableSkin* skin)
@@ -232,7 +232,7 @@ void SkinCompPropsGUI::sliderValueChanged(Slider* slider)
 	}
 	else if(slider == &frame)
 	{
-		comp->setFrame(slider->getValue());
+		comp->setValue(slider->getValue());
 	}
 	else if(slider == &sensitivity)
 	{
@@ -248,9 +248,9 @@ void SkinCompPropsGUI::resized()
 	int x = 0;
 	int y = 0;
     
-    int h= ShottyLook::defaultControllHeight;
-	name.setBounds(x,y,getWidth(),15);
-	y+= ShottyLook::defaultControllHeight;
+    int h= 20;
+	name.setBounds(x,y,getWidth(),h);
+	y+= h;
 	int w = (getWidth())/2;
     
     mode.setBounds(x, y, getWidth(), h);
@@ -259,26 +259,26 @@ void SkinCompPropsGUI::resized()
     clipMode.setBounds(x, y, getWidth(), h);
     y+=clipMode.getHeight();
     
-	firstFrame.setBounds(x,y,w,ShottyLook::defaultControllHeight);
+	firstFrame.setBounds(x,y,w,h);
 	x=firstFrame.getRight();
-	lastFrame.setBounds(x,y,w,ShottyLook::defaultControllHeight);
-	y+=ShottyLook::defaultControllHeight;
+	lastFrame.setBounds(x,y,w,h);
+	y+=h;
     x=0;
     
-    useFullRange.setBounds(x, y, getWidth(), ShottyLook::defaultControllHeight);
+    useFullRange.setBounds(x, y, getWidth(), h);
     y+=useFullRange.getHeight();
     
-	frame.setBounds(x,y,getWidth(),ShottyLook::defaultControllHeight);
-	y+=ShottyLook::defaultControllHeight;
-	interpolate.setBounds(x,y,getWidth(),ShottyLook::defaultControllHeight);
-	y+=ShottyLook::defaultControllHeight;
-	useControllArea.setBounds(x,y,getWidth(),ShottyLook::defaultControllHeight);
-	y+=ShottyLook::defaultControllHeight;
+	frame.setBounds(x,y,getWidth(),h);
+	y+=h;
+	interpolate.setBounds(x,y,getWidth(),h);
+	y+=h;
+	useControllArea.setBounds(x,y,getWidth(),h);
+	y+=h;
 
     
-    title.setBounds(x,y,getWidth(),ShottyLook::defaultControllHeight);
+    title.setBounds(x,y,getWidth(),h);
     y+=title.getHeight();
     
-    helpText.setBounds(x,y,getWidth(),ShottyLook::defaultControllHeight*4);
+    helpText.setBounds(x,y,getWidth(),h*4);
     y+=helpText.getHeight();
 }

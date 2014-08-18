@@ -24,5 +24,4 @@ private:
     
 	RenderSkinEditor editor;
 	WeakReference<EditableSkin> skin;
-    
 };

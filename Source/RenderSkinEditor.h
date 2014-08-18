@@ -40,6 +40,8 @@ private:
 	OwnedArray<PlacementRect> boundings;
 	OwnedArray<PlacementRect> controlls;
     
+
+    
     class Placer : public Component
     {
     public:

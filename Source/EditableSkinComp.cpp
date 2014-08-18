@@ -37,6 +37,7 @@ XmlElement* EditableSkinComp::createXml()
     e2->setAttribute("help", this->helpText);
     e2->setAttribute("title", this->title);
     e2->setAttribute("fullRange",(bool)this->useFullFrameRange.getValue());
+    e2->setAttribute("parameterIndex", this->getParameterIndex());
     
 	return e2;
 }

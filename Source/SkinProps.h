@@ -5,6 +5,7 @@
 class Skin;
 class EditableSkin;
 class RenderSkinPreviewWindow;
+class PluginWindow;
 
 class SkinProps:
 public Slider::Listener,
@@ -26,9 +27,12 @@ public:
 	void comboBoxChanged(ComboBox* box)override;
     void changeListenerCallback(ChangeBroadcaster* obj)override;
     void buttonClicked(Button* button)override;
-
+    void createPlugin(PluginDescription*);
     double getScale()const;
-
+    
+    void openPluginEditor();
+    void clearPlugin();
+    
 private:
     WeakReference<EditableSkin> skin;
     NamableObjectLabel name;
@@ -37,6 +41,9 @@ private:
 	TextButton test;
 	TextButton exportFile;
     TextButton preview;
+    
+    TextButton loadPlugin;
+    TextButton showPlugin;
     
 	FilenameComponent imagePath;
 	FilenameComponent targetPath;
@@ -49,6 +56,22 @@ private:
     
     ScopedPointer<RenderSkinPreviewWindow> previewWindow;
     ScopedPointer<RenderSkinPreviewWindow> testWindow;
-
+    
     ScopedPointer<Skin> testInstance;
+    
+    ScopedPointer<AudioPluginInstance> plugin;
+    SafePointer<PluginWindow> pluginUI;
+    
+    AudioPluginFormatManager pluginFormats;
+    KnownPluginList knownPlugins;
+};
+
+class PluginWindow :
+public DocumentWindow,
+public DeletedAtShutdown
+{
+public:
+    PluginWindow(Component* ed,bool owned = true);
+    ~PluginWindow();
+    void closeButtonPressed();
 };

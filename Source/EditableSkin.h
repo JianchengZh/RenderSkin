@@ -74,7 +74,7 @@ private:
      source images
      **/
     Array<Image> sourceImages;
-    
+
     
     friend class SkinProps;
     WeakReference<EditableSkin>::Master masterReference;
