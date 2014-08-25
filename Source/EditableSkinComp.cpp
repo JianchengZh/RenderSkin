@@ -5,6 +5,9 @@ EditableSkinComp::EditableSkinComp(EditableSkin* skin):
 SkinComp(skin)
 {
     this->skin = skin;
+    
+    this->compType = SkinComp::slider;
+    
     this->useFullFrameRange = false;
     frames.setLength(skin->getSourceImages().size()-1);
 }
@@ -17,6 +20,17 @@ EditableSkinComp::~EditableSkinComp()
 EditableSkin* EditableSkinComp::getSkin()const
 {
     return this->skin;
+}
+
+double EditableSkinComp::getGradient()const
+{
+    return gradient.getValue();
+}
+
+void EditableSkinComp::setGradient(double g)
+{
+    this->gradient = g;
+    this->sendChangeMessage();
 }
 
 XmlElement* EditableSkinComp::createXml()
@@ -38,7 +52,8 @@ XmlElement* EditableSkinComp::createXml()
     e2->setAttribute("title", this->title);
     e2->setAttribute("fullRange",(bool)this->useFullFrameRange.getValue());
     e2->setAttribute("parameterIndex", this->getParameterIndex());
-    
+    e2->setAttribute("gradient", this->getGradient());
+
 	return e2;
 }
 

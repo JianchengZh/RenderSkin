@@ -1,39 +1,39 @@
 #include "RenderSkinMainComponent.h"
 #include "EditableSkin.h"
 
-RenderSkinMainComponent::RenderSkinMainComponent(RenderSkin* skin):
-menu(skin),
+RenderSkinMainComponent::RenderSkinMainComponent(RenderSkin* app):
+menu(app),
 tabs(TabbedButtonBar::TabsAtTop)
 {
-    this->skin = skin;
-    this->addKeyListener(skin->getKeyMappings());
-    this->skin->registerAllCommandsForTarget(this);
-    this->skin->addChangeListener(this);
+    this->app = app;
+    this->addKeyListener(app->getKeyMappings());
+    this->app->registerAllCommandsForTarget(this);
+    this->app->addChangeListener(this);
     
     this->addAndMakeVisible(&this->menu);
     this->addAndMakeVisible(&this->tabs);
     this->tabs.getTabbedButtonBar().addChangeListener(this);
     
-    this->changeListenerCallback(this->skin);
+    this->changeListenerCallback(this->app);
 }
 
 
 void RenderSkinMainComponent::changeListenerCallback(ChangeBroadcaster* obj)
 {
-    if(obj == this->skin)
+    if(obj == this->app)
     {
         int tab = jmax(0,this->tabs.getCurrentTabIndex());
         this->tabs.clearTabs();
-        for(int i = 0 ; i < this->skin->getOpenSkins().size(); i++)
+        for(int i = 0 ; i < this->app->getOpenSkins().size(); i++)
         {
-            EditableSkin* skin = this->skin->getOpenSkins().getUnchecked(i);
+            EditableSkin* skin = this->app->getOpenSkins().getUnchecked(i);
             this->tabs.addTab(skin->getName(),Colours::white,new RenderSkinMainGUI(skin),true);
         }
         this->tabs.setCurrentTabIndex(tab);
     }
     else if(&tabs.getTabbedButtonBar() == obj)
     {
-        skin->setCurrentSkin(skin->getOpenSkins()[tabs.getCurrentTabIndex()]);
+        app->setCurrentSkin(app->getOpenSkins()[tabs.getCurrentTabIndex()]);
     }
 }
 
@@ -56,14 +56,14 @@ void RenderSkinMainComponent::getAllCommands (Array <CommandID>& commands)
     commands.add(RenderSkin::save);
     commands.add(RenderSkin::closeSkin);
     commands.add(RenderSkin::addComp);
-    commands.add(RenderSkin::undo);
-    commands.add(RenderSkin::redo);
-    commands.add(RenderSkin::removeItem);
+//    commands.add(RenderSkin::undo);
+//    commands.add(RenderSkin::redo);
+//    commands.add(RenderSkin::removeItem);
 }
 
 void RenderSkinMainComponent::getCommandInfo (CommandID commandID, ApplicationCommandInfo& result)
 {
-    result.setActive(this->skin->getCurrentSkin());
+    result.setActive(this->app->getCurrentSkin());
     switch(commandID)
     {
         case RenderSkin::newskin:
@@ -83,17 +83,19 @@ void RenderSkinMainComponent::getCommandInfo (CommandID commandID, ApplicationCo
         case RenderSkin::save:
         {
             result.setInfo("save","save skin","file",0);
-            result.setActive(this->skin->getCurrentSkin() && !this->skin->getCurrentSkin()->isSaved());
+            result.setActive(this->app->getCurrentSkin() && !this->app->getCurrentSkin()->isSaved());
             break;
         }
         case RenderSkin::closeSkin:
         {
             result.setInfo("close skin","close skin","file",0);
+            result.setActive(this->app->getCurrentSkin());
             break;
         }
         case RenderSkin::addComp:
         {
             result.setInfo("add comp","addsa a comp","comps",0);
+            result.setActive(this->app->getCurrentSkin());
             break;
         }
         case RenderSkin::undo:
@@ -120,7 +122,7 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
     {
         case RenderSkin::newskin:
         {
-            skin->addSkin();
+            app->addSkin();
             break;
         }
         case RenderSkin::open:
@@ -128,7 +130,7 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
             FileChooser fc("open skin",File::nonexistent,"*.d3ckskin");
             if(fc.browseForFileToOpen())
             {
-                skin->addSkin(fc.getResult());
+                app->addSkin(fc.getResult());
             }
             break;
         }
@@ -136,21 +138,21 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
         {
             if(AlertWindow::showOkCancelBox(AlertWindow::QuestionIcon,"close skin?","close skin?"))
             {
-                if(skin->getCurrentSkin()->attemptToClose())
+                if(app->getCurrentSkin()->attemptToClose())
                 {
-                    skin->removeSkin(skin->getCurrentSkin());
+                    app->removeSkin(app->getCurrentSkin());
                 }
             }
             break;
         }
         case RenderSkin::save:
         {
-            skin->getCurrentSkin()->save();
+            app->getCurrentSkin()->save();
             break;
         }
         case RenderSkin::addComp:
         {
-            Skin* s = skin->getOpenSkins().getUnchecked(tabs.getCurrentTabIndex());
+            Skin* s = app->getOpenSkins().getUnchecked(tabs.getCurrentTabIndex());
             SkinComp* sc = s->createComp();
             sc->setList(const_cast<OwnedList<SkinComp>*>(&s->getComps()));
             break;

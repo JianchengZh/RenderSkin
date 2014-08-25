@@ -5,7 +5,7 @@ EditableSkin::EditableSkin()
 {
     setName("new skin");
     backgroundframe = 0;
-    maskOpacity = 0.5;
+    maskOpacity = 0;
     
     maskOpacity.addListener(this);
     //    backgroundframe.addListener(this);
@@ -196,8 +196,17 @@ const Array<Image>& EditableSkin::getSourceImages() const
     return this->sourceImages;
 }
 
+void EditableSkin::produce()
+{
+    JPEGImageFormat f;
+    f.setQuality(this->getQuality());
+    this->createSkin(this->targetPath,f );
+}
+
+
 void EditableSkin::createSkin(const File& targetDir,ImageFileFormat& format)
 {
+ 
 	if(targetPath.create());
 	{
         const String skinFileName = "skin.d3ckskin";//this->getFile().getFileName();
@@ -221,9 +230,16 @@ void EditableSkin::createSkin(const File& targetDir,ImageFileFormat& format)
         
 		for(int i = getComps().items.size() ; -- i >= 0 ;)
 		{
+            
 			EditableSkinComp* c = dynamic_cast<EditableSkinComp*>(getComps().items.getUnchecked(i));
             jassert(c) //an editable skin should only hold editbale skin comps
-			int x = c->graphicArea.getX();
+			
+            if(c->graphicArea.isEmpty())
+            {
+                
+            }
+            
+            int x = c->graphicArea.getX();
 			int y = c->graphicArea.getY();
 			int h = c->graphicArea.getHeight();
 			int w = c->graphicArea.getWidth();

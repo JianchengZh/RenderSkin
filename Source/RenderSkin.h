@@ -47,6 +47,9 @@ public:
 	void addSkin(const File& file = File::nonexistent);
     bool attemptToClose();
     
+
+
+    
     Array<EditableSkin*> getOpenSkins()const;
     EditableSkin* getCurrentSkin()const;
     
@@ -60,4 +63,7 @@ private:
     D3CKHistory history;
 	EditableSkin* currentSkin;
 	OwnedArray<EditableSkin> skins;
+    
+    WeakReference<RenderSkin>::Master masterReference;
+    friend class WeakReference<RenderSkin>;
 };

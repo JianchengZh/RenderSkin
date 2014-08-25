@@ -21,7 +21,7 @@ public:
     bool perform (const InvocationInfo& info)override;
     
 private:
-    RenderSkin* skin;
+    RenderSkin* app;
 	MenuBarComponent menu;
 	TabbedComponent tabs;
 };

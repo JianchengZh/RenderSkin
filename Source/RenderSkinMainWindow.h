@@ -7,12 +7,12 @@ class RenderSkinMainWindow :
 public DocumentWindow
 {
 public:
-	RenderSkinMainWindow();
+	RenderSkinMainWindow(RenderSkin* app);
     ~RenderSkinMainWindow();
     
     void closeButtonPressed()override;
     
 private:
-	RenderSkin skin;
+	WeakReference<RenderSkin> app;
 	RenderSkinMainComponent comp;
 };

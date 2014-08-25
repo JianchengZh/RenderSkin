@@ -12,7 +12,14 @@ SkinCompPropsGUI::SkinCompPropsGUI(EditableSkin* skin)
 	addAndMakeVisible(&firstFrame);
 	addAndMakeVisible(&lastFrame);
 	addAndMakeVisible(&frame);
+    
+    addAndMakeVisible(gradient);
+    gradient.addListener(this);
+    gradient.setRange(0, 1);
+    
     addAndMakeVisible(&name);
+    name.setEditable(true);
+    name.addListener(this);
     
     addAndMakeVisible(&helpText);
     addAndMakeVisible(&title);
@@ -26,16 +33,18 @@ SkinCompPropsGUI::SkinCompPropsGUI(EditableSkin* skin)
     addAndMakeVisible(interpolate);
     interpolate.setButtonText("interpolate");
     interpolate.addListener(this);
+    
 	addAndMakeVisible(useControllArea);
     useControllArea.setButtonText("userControllArea");
     useControllArea.addListener(this);
+    
     addAndMakeVisible(useFullRange);
     useFullRange.setButtonText("userFullRange");
     useFullRange.addListener(this);
     
     this->clipMode.addItem("rect", SkinComp::ClipType::rect+1);
     this->clipMode.addItem("ellipse", SkinComp::ClipType::ellipse+1);
-    this->clipMode.addItem("gradient rect", SkinComp::ClipType::smoothrect+1);
+//    this->clipMode.addItem("gradient rect", SkinComp::ClipType::smoothrect+1);
     this->clipMode.addListener(this);
     
     this->mode.addItem("image", SkinComp::CompType::none+1);
@@ -66,12 +75,21 @@ SkinCompPropsGUI::SkinCompPropsGUI(EditableSkin* skin)
 
 SkinCompPropsGUI::~SkinCompPropsGUI()
 {
-    skin->getComps().selectedItems.removeChangeListener(this);
+    if(skin)
+    {
+        skin->getComps().selectedItems.removeChangeListener(this);
+    }
 }
 
 void SkinCompPropsGUI::labelTextChanged(Label* lab)
 {
-    
+    if(lab == &this->name)
+    {
+        if(this->getComp())
+        {
+            this->getComp()->setName(lab->getText());
+        }
+    }
 }
 
 void SkinCompPropsGUI::buttonClicked(Button* b)
@@ -106,7 +124,8 @@ void SkinCompPropsGUI::buttonClicked(Button* b)
             SkinComp* c =  dynamic_cast<SkinComp*>(this->skin->getComps().selectedItems.getSelectedItem(i));
             if(c)
             {
-                c->useControllArea = b->getToggleState();
+                c->setUseControllArea(b->getToggleState());
+                c->sendChangeMessage();
             }
         }
     }
@@ -141,7 +160,7 @@ void SkinCompPropsGUI::comboBoxChanged(ComboBox* box)
 
 void SkinCompPropsGUI::paintOverChildren(Graphics& g)
 {
-    if(this->skin->getComps().selectedItems.getNumSelected() > 1)
+    if(this->skin && this->skin->getComps().selectedItems.getNumSelected() > 1)
     {
         g.setColour(Colours::red.withAlpha(0.3f));
         g.fillRect(mode.getBounds());
@@ -177,6 +196,7 @@ void SkinCompPropsGUI::changeListenerCallback(ChangeBroadcaster* obj)
 	lastFrame.setRange(0,comp->getSkin()->getSourceImages().size()-1,1);
 	lastFrame.setValue(comp->getRange().getEnd(),NotificationType::dontSendNotification);
     
+    gradient.setValue(comp->getGradient());
     
     this->helpText.setText(comp->helpText);
     this->title.setText(comp->title);
@@ -238,6 +258,10 @@ void SkinCompPropsGUI::sliderValueChanged(Slider* slider)
 	{
 		comp->sensitivity = sensitivity.getValue();
 	}
+    else if(slider == &gradient)
+	{
+		comp->setGradient(gradient.getValue());
+	}
     
     comp->sendChangeMessage();
 
@@ -258,6 +282,9 @@ void SkinCompPropsGUI::resized()
     
     clipMode.setBounds(x, y, getWidth(), h);
     y+=clipMode.getHeight();
+    
+    gradient.setBounds(x, y, getWidth(), h);
+    y+=y;
     
 	firstFrame.setBounds(x,y,w,h);
 	x=firstFrame.getRight();

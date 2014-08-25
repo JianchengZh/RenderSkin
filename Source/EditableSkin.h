@@ -34,6 +34,8 @@ public:
     bool isExported() const;
     bool isFileEqualToState(const File& file) const;
     
+    void produce();
+
     void createSkin(const File& file, ImageFileFormat& format);
     
     const Array<Image>& getSourceImages() const;

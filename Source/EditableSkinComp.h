@@ -16,6 +16,9 @@ public:
     void setRange(int start,int end);
     void setFirtFrame(int);
     void setLastFrame(int);
+    
+    double getGradient()const;
+    void setGradient(double g);
 
     EditableSkin* getSkin()const;
     

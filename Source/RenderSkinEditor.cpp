@@ -10,6 +10,7 @@ trim(&skin->graphicArea)
 {
     this->skin = skin;
 	colour = Colours::red;
+    skin->getComps().addChangeListener(this);
 	skin->addChangeListener(this);
 	changeListenerCallback(skin);
 	addAndMakeVisible(&trim);
@@ -19,7 +20,11 @@ trim(&skin->graphicArea)
 
 RenderSkinEditor::~RenderSkinEditor()
 {
-	skin->removeChangeListener(this);
+    if(skin)
+    {
+        skin->getComps().removeChangeListener(this);
+        skin->removeChangeListener(this);
+    }
 }
 
 void RenderSkinEditor::findLassoItemsInArea (Array <ListItem*>& itemsFound, const Rectangle<int>& area)
@@ -64,6 +69,7 @@ void RenderSkinEditor::mouseUp(const MouseEvent& e)
         SkinComp* sc = skin->createComp();
         sc->graphicArea = this->placer.getBounds();
         sc->setList(&skin->getComps());
+        skin->getComps().selectedItems.selectOnly(sc);
     }
 }
 
@@ -80,7 +86,7 @@ SelectedItemSet<ListItem*>& RenderSkinEditor::getLassoSelection()
 
 void RenderSkinEditor::changeListenerCallback(ChangeBroadcaster* obj)
 {
-	if(obj == skin)
+	if(obj == skin || obj == &skin->getComps())
 	{
 		boundings.clear();
 		controlls.clear();
@@ -108,30 +114,33 @@ void RenderSkinEditor::changeListenerCallback(ChangeBroadcaster* obj)
 
 void RenderSkinEditor::paint(Graphics& g)
 {
-    if(skin->getSourceImages().size()) // draw in edit mode
+    if(skin)
     {
-        Rectangle<int> c = skin->graphicArea;
-        Image img = skin->getSourceImages()[skin->backgroundframe.getValue()];
-        g.drawImage(img,0,0,img.getWidth(),img.getHeight(),0,0,img.getWidth(),img.getHeight());
+        if(skin->getSourceImages().size()) // draw in edit mode
+        {
+            Rectangle<int> c = skin->graphicArea;
+            Image img = skin->getSourceImages()[skin->backgroundframe.getValue()];
+            g.drawImage(img,0,0,img.getWidth(),img.getHeight(),0,0,img.getWidth(),img.getHeight());
+        }
+        else
+        {
+            g.drawText("background image not set properly", 0, 0, getWidth(), getHeight(), Justification::centred, true);
+        }
+        
+        
+        g.setColour(colour);
+        g.setOpacity(0.5);
+        
+        for(int i = skin->getComps().getNumRows() ; -- i >= 0 ; )
+        {
+            SkinComp* comp = skin->getComps().items.getUnchecked(i);
+            if(comp->useControllArea == true)
+            {
+                Rectangle<int> rect = comp->graphicArea.getUnion(comp->controllArea);
+                g.drawRect(rect);
+            }
+        }
     }
-    else
-    {
-        g.drawText("background image not set properly", 0, 0, getWidth(), getHeight(), Justification::centred, true);
-    }
-    
-    
-	g.setColour(colour);
-	g.setOpacity(0.5);
-    
-	for(int i = skin->getComps().getNumRows() ; -- i >= 0 ; )
-	{
-		SkinComp* comp = skin->getComps().items.getUnchecked(i);
-		if(comp->useControllArea == true)
-		{
-			Rectangle<int> rect = comp->graphicArea.getUnion(comp->controllArea);
-			g.drawRect(rect);
-		}
-	}
 }
 
 void RenderSkinEditor::Placer::paint(Graphics &g)

@@ -10,11 +10,20 @@ PlacementRect(rect)
     this->editor = editor;
 	this->comp = comp;
     this->editor->getSkin()->getComps().selectedItems.addChangeListener(this);
+    
+    comp->addChangeListener(this);
 }
 
 SkinPlacementRect::~SkinPlacementRect()
 {
-    this->editor->getSkin()->getComps().selectedItems.removeChangeListener(this);
+    if(this->editor->getSkin())
+    {
+        this->editor->getSkin()->getComps().selectedItems.removeChangeListener(this);
+    }
+    if(this->comp)
+    {
+        this->comp->removeChangeListener(this);
+    }
 };
 
 void SkinPlacementRect::changeListenerCallback(ChangeBroadcaster*obj)
@@ -30,15 +39,22 @@ const Colour& SkinPlacementRect::getColour() const
 
 void SkinPlacementRect::paint(Graphics& g)
 {
-    PlacementRect::paint(g,this);
-    g.setOpacity(this->comp->getSkin()->maskOpacity.getValue());
-    const Image mask = this->comp->getMask(this->getBounds());
-    g.drawImageAt(mask, 0, 0);
+    if(this->comp)
+    {
+        PlacementRect::paint(g,this);
+        g.setOpacity(this->comp->getSkin()->maskOpacity.getValue());
+        const Image mask = this->comp->getMask(this->getBounds());
+        g.drawImageAt(mask, 0, 0);
+    }
 }
 
 bool SkinPlacementRect::isSelected() const
 {
-    return this->editor->getSkin()->getComps().selectedItems.isSelected(this->comp);
+    if(this->editor->getSkin())
+    {
+        return this->editor->getSkin()->getComps().selectedItems.isSelected(this->comp);
+    }
+    return false;
 }
 
 void SkinPlacementRect::mouseDown(const MouseEvent& e)
@@ -80,9 +96,9 @@ void SkinPlacementRect::mouseUp(const MouseEvent& e)
 		menu.addSubMenu("index",indexSelect);
         
 		PopupMenu compType;
-		compType.addItem(10000,"graphic",true,comp->getCompType() == 0);
-		compType.addItem(10001,"slider",true,comp->getCompType() == 1);
-		compType.addItem(10002,"toggleButton",true,comp->getCompType() == 2);
+//		compType.addItem(10000,"graphic",true,comp->getCompType() == 0);
+//		compType.addItem(10001,"slider",true,comp->getCompType() == 1);
+//		compType.addItem(10002,"toggleButton",true,comp->getCompType() == 2);
 		menu.addSubMenu("mode",compType);
         
 		PopupMenu clipType;

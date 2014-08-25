@@ -12,6 +12,8 @@ imagePath("sourceimagepath",skin->getSourceImagePath(),false,true,false,"*","","
 targetPath("targetPath",skin->getTargetPath(),false,true,true,"*","","select folder to save skin to")
 {
     this->skin = skin;
+    skin->addChangeListener(this);
+    
     addAndMakeVisible(name);
 	addAndMakeVisible(fitBoundsToImage);
 	addAndMakeVisible(test);
@@ -75,6 +77,10 @@ targetPath("targetPath",skin->getTargetPath(),false,true,true,"*","","select fol
 
 SkinProps::~SkinProps()
 {
+    if(skin)
+    {
+        skin->removeChangeListener(this);
+    }
     this->testWindow = nullptr; //close the window ahead of time to prevent clash with skin;
     this->testInstance = nullptr;
     
@@ -135,13 +141,14 @@ void SkinProps::filenameComponentChanged (FilenameComponent* fileComponentThatHa
 	else if(fileComponentThatHasChanged == &targetPath)
 	{
 		skin->targetPath = fileComponentThatHasChanged->getCurrentFile();
+    
 	}
 }
 
 void SkinProps::changeListenerCallback(ChangeBroadcaster* obj)
 {
     screenRatio.setValue(skin->getScreenRatio());
-    bgFrame.setRange(0,skin->getSourceImages().size(),1);
+    bgFrame.setRange(0,skin->getSourceImages().size()-1,1);
     bgFrame.setValue(skin->backgroundframe.getValue(),NotificationType::dontSendNotification);
     maskOpacity.setValue(skin->maskOpacity.getValue(),NotificationType::dontSendNotification);
 }

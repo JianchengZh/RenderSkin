@@ -41,6 +41,8 @@ private:
 	Slider firstFrame;
 	Slider lastFrame;
     
+    Slider gradient;
+
 	Slider sensitivity;
     
 	ToggleButton interpolate;

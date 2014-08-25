@@ -34,7 +34,7 @@ RenderSkin::RenderSkin()
 
 RenderSkin::~RenderSkin()
 {
-    
+    masterReference.clear();
 }
 
 Array<EditableSkin*> RenderSkin::getOpenSkins()const

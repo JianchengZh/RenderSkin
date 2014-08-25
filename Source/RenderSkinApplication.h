@@ -15,4 +15,5 @@ class RenderSkinApplication :
     
 private:
 	ScopedPointer<RenderSkinMainWindow>  window;
+    ScopedPointer<RenderSkin> app;
 };
