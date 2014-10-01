@@ -15,7 +15,7 @@ void RenderSkinApplication::initialise(const String& commandLineParameters)
 
         if(inputfile.existsAsFile())
         {
-            EditableSkin skin;
+            EditableSkin skin(app);
             skin.loadFromFile(inputfile);
             DBG("producing:" + skin.getName());
             skin.produce();

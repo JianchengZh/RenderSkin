@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="mLcK3z" name="RenderSkin" projectType="guiapp" version="1.2"
+<JUCERPROJECT id="mLcK3z" name="RenderSkin" projectType="guiapp" version="1.5"
               bundleIdentifier="com.audioD3CK.RenderSkin" jucerVersion="3.1.0"
               includeBinaryInAppConfig="1" companyEmail="support@audio.d3ck.net"
               companyWebsite="http://audio.d3ck.net" companyName="audioD3CK"
@@ -9,72 +9,218 @@
               pluginDesc="RenderSkin" pluginName="RenderSkin" buildAAX="1"
               buildRTAS="0" buildVST3="1" buildAU="1" buildVST="1">
   <MAINGROUP id="OJbMY3" name="RenderSkin">
-    <GROUP id="{4D1EDE29-F377-0354-CFDE-86CB2428AA8F}" name="Source">
-      <GROUP id="{8880A18D-939F-4857-B567-17BDC1FEE267}" name="UI">
-        <FILE id="HLHwBX" name="SkinCompControllPlacementRect.cpp" compile="1"
-              resource="0" file="Source/SkinCompControllPlacementRect.cpp"/>
-        <FILE id="jonmHU" name="SkinCompControllPlacementRect.h" compile="0"
-              resource="0" file="Source/SkinCompControllPlacementRect.h"/>
-        <FILE id="v3q6yL" name="RenderSkinMainComponent.cpp" compile="1" resource="0"
-              file="Source/RenderSkinMainComponent.cpp"/>
-        <FILE id="lDnNkG" name="RenderSkinMainComponent.h" compile="0" resource="0"
-              file="Source/RenderSkinMainComponent.h"/>
-        <FILE id="k7UIXE" name="RenderSkinMainWindow.cpp" compile="1" resource="0"
-              file="Source/RenderSkinMainWindow.cpp"/>
-        <FILE id="eGqsqM" name="RenderSkinMainWindow.h" compile="0" resource="0"
-              file="Source/RenderSkinMainWindow.h"/>
-        <FILE id="SwYnhJ" name="SkinCompPropsGUI.cpp" compile="1" resource="0"
-              file="Source/SkinCompPropsGUI.cpp"/>
-        <FILE id="sPQyST" name="SkinCompPropsGUI.h" compile="0" resource="0"
-              file="Source/SkinCompPropsGUI.h"/>
-        <FILE id="z3TDcJ" name="SkinPlacementRect.cpp" compile="1" resource="0"
-              file="Source/SkinPlacementRect.cpp"/>
-        <FILE id="NwGdqN" name="SkinPlacementRect.h" compile="0" resource="0"
-              file="Source/SkinPlacementRect.h"/>
-        <FILE id="XxcMi8" name="RenderSkinEditor.h" compile="0" resource="0"
-              file="Source/RenderSkinEditor.h"/>
-        <FILE id="vnQE9T" name="RenderSkinEditor.cpp" compile="1" resource="0"
-              file="Source/RenderSkinEditor.cpp"/>
-        <FILE id="mVyBBU" name="SkinProps.cpp" compile="1" resource="0" file="Source/SkinProps.cpp"/>
-        <FILE id="fpI2m5" name="SkinProps.h" compile="0" resource="0" file="Source/SkinProps.h"/>
-        <FILE id="kCZ7Ij" name="RenderSkinMainGUI.cpp" compile="1" resource="0"
-              file="Source/RenderSkinMainGUI.cpp"/>
-        <FILE id="QzoASy" name="RenderSkinMainGUI.h" compile="0" resource="0"
-              file="Source/RenderSkinMainGUI.h"/>
-        <FILE id="K9nkIn" name="RenderSkinPreviewWindow.cpp" compile="1" resource="0"
-              file="Source/RenderSkinPreviewWindow.cpp"/>
-        <FILE id="s2YIYh" name="RenderSkinPreviewWindow.h" compile="0" resource="0"
-              file="Source/RenderSkinPreviewWindow.h"/>
-        <FILE id="tb02Qo" name="SkinPreviewCompGUI.cpp" compile="1" resource="0"
-              file="Source/SkinPreviewCompGUI.cpp"/>
-        <FILE id="Fj3hd8" name="SkinPreviewCompGUI.h" compile="0" resource="0"
-              file="Source/SkinPreviewCompGUI.h"/>
-        <FILE id="gj4Ds1" name="SkinPreviewGUI.cpp" compile="1" resource="0"
-              file="Source/SkinPreviewGUI.cpp"/>
-        <FILE id="HhMZbw" name="SkinPreviewGUI.h" compile="0" resource="0"
-              file="Source/SkinPreviewGUI.h"/>
-      </GROUP>
-      <FILE id="RVNwvq" name="EditableSkinComp.cpp" compile="1" resource="0"
-            file="Source/EditableSkinComp.cpp"/>
-      <FILE id="XwWnNW" name="EditableSkinComp.h" compile="0" resource="0"
-            file="Source/EditableSkinComp.h"/>
-      <FILE id="FpdzFl" name="EditableSkin.cpp" compile="1" resource="0"
-            file="Source/EditableSkin.cpp"/>
-      <FILE id="XKQlVm" name="EditableSkin.h" compile="0" resource="0" file="Source/EditableSkin.h"/>
-      <GROUP id="{9B57C994-A804-8538-87AE-B5EAA5D2B891}" name="Frame">
-        <FILE id="WEnPoZ" name="RenderSkin.cpp" compile="1" resource="0" file="Source/RenderSkin.cpp"/>
-        <FILE id="FZvhwB" name="RenderSkin.h" compile="0" resource="0" file="Source/RenderSkin.h"/>
-        <FILE id="Onj40X" name="RenderSkinApplication.cpp" compile="1" resource="0"
-              file="Source/RenderSkinApplication.cpp"/>
-        <FILE id="CrHcLH" name="RenderSkinApplication.h" compile="0" resource="0"
-              file="Source/RenderSkinApplication.h"/>
-        <FILE id="yhiEDs" name="main.cpp" compile="1" resource="0" file="Source/main.cpp"/>
-      </GROUP>
+    <GROUP name="Source">
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinProps.h"
+            name="SkinProps.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinProps.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinProps.cpp"
+            name="SkinProps.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinProps.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewGUI.h"
+            name="SkinPreviewGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewGUI.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewGUI.cpp"
+            name="SkinPreviewGUI.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewGUI.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewCompGUI.h"
+            name="SkinPreviewCompGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewCompGUI.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewCompGUI.cpp"
+            name="SkinPreviewCompGUI.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPreviewCompGUI.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPlacementRect.h"
+            name="SkinPlacementRect.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPlacementRect.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPlacementRect.cpp"
+            name="SkinPlacementRect.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinPlacementRect.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompPropsGUI.h"
+            name="SkinCompPropsGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompPropsGUI.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompPropsGUI.cpp"
+            name="SkinCompPropsGUI.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompPropsGUI.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompControllPlacementRect.h"
+            name="SkinCompControllPlacementRect.h" compile="0" resource="0"
+            file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompControllPlacementRect.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompControllPlacementRect.cpp"
+            name="SkinCompControllPlacementRect.cpp" compile="1" resource="0"
+            file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/SkinCompControllPlacementRect.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinPreviewWindow.h"
+            name="RenderSkinPreviewWindow.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinPreviewWindow.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinPreviewWindow.cpp"
+            name="RenderSkinPreviewWindow.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinPreviewWindow.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainWindow.h"
+            name="RenderSkinMainWindow.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainWindow.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainWindow.cpp"
+            name="RenderSkinMainWindow.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainWindow.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainGUI.h"
+            name="RenderSkinMainGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainGUI.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainGUI.cpp"
+            name="RenderSkinMainGUI.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainGUI.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainComponent.h"
+            name="RenderSkinMainComponent.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainComponent.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainComponent.cpp"
+            name="RenderSkinMainComponent.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinMainComponent.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinEditor.h"
+            name="RenderSkinEditor.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinEditor.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinEditor.cpp"
+            name="RenderSkinEditor.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinEditor.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinApplication.h"
+            name="RenderSkinApplication.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinApplication.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinApplication.cpp"
+            name="RenderSkinApplication.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkinApplication.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkin.h"
+            name="RenderSkin.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkin.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkin.cpp"
+            name="RenderSkin.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/RenderSkin.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/main.cpp"
+            name="main.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/main.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkinComp.h"
+            name="EditableSkinComp.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkinComp.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkinComp.cpp"
+            name="EditableSkinComp.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkinComp.cpp"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.h"
+            name="EditableSkin.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.h"/>
+      <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.cpp"
+            name="EditableSkin.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.cpp"/>
     </GROUP>
     <GROUP id="{2D71017E-37BB-56CE-A309-D389E15F48F1}" name="icons">
       <FILE id="appIcon" name="icon.jpg" compile="0" resource="1" file="../../../../www/test/products/RenderSkin/icon.jpg"/>
     </GROUP>
-    <GROUP name="deps" id="xEmBri"/>
+    <GROUP name="deps" id="xEmBri">
+      <GROUP name="D3CKCore">
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/VirtualDragAndDropTarget.h"
+              name="VirtualDragAndDropTarget.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/VirtualDragAndDropTarget.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/VirtualDragAndDropTarget.cpp"
+              name="VirtualDragAndDropTarget.cpp" compile="0" resource="0"
+              file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/VirtualDragAndDropTarget.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/SimpleTaggedItem.h"
+              name="SimpleTaggedItem.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/SimpleTaggedItem.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/SimpleTaggedItem.cpp"
+              name="SimpleTaggedItem.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/SimpleTaggedItem.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PropertySource.h"
+              name="PropertySource.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PropertySource.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PropertySource.cpp"
+              name="PropertySource.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PropertySource.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PlacementRect.h"
+              name="PlacementRect.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PlacementRect.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PlacementRect.cpp"
+              name="PlacementRect.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/PlacementRect.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/OwnedListGUI.h"
+              name="OwnedListGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/OwnedListGUI.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/OwnedList.h"
+              name="OwnedList.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/OwnedList.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObjectLabel.h"
+              name="NamableObjectLabel.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObjectLabel.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObjectLabel.cpp"
+              name="NamableObjectLabel.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObjectLabel.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObject.h"
+              name="NamableObject.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObject.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObject.cpp"
+              name="NamableObject.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/NamableObject.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/MoveListItem.h"
+              name="MoveListItem.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/MoveListItem.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/MoveListItem.cpp"
+              name="MoveListItem.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/MoveListItem.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItemFactory.h"
+              name="ListItemFactory.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItemFactory.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItem.h"
+              name="ListItem.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItem.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItem.cpp"
+              name="ListItem.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/ListItem.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/List.h"
+              name="List.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/List.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/List.cpp"
+              name="List.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/List.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/IdObject.h"
+              name="IdObject.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/IdObject.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/HistorySource.h"
+              name="HistorySource.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/HistorySource.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/D3CKHistory.h"
+              name="D3CKHistory.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/D3CKHistory.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/D3CKHistory.cpp"
+              name="D3CKHistory.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/D3CKHistory.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/CrossSSE.h"
+              name="CrossSSE.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/CrossSSE.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/Copyable.h"
+              name="Copyable.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/Copyable.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundsDriver.h"
+              name="BoundsDriver.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundsDriver.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundsDriver.cpp"
+              name="BoundsDriver.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundsDriver.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundDrivenComponent.h"
+              name="BoundDrivenComponent.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundDrivenComponent.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundDrivenComponent.cpp"
+              name="BoundDrivenComponent.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/BoundDrivenComponent.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/AlignedClass.h"
+              name="AlignedClass.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/AlignedClass.h"/>
+      </GROUP>
+      <GROUP name="D3CKInterface">
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemSource.h"
+              name="TaggedItemSource.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemSource.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemSource.cpp"
+              name="TaggedItemSource.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemSource.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemHandler.h"
+              name="TaggedItemHandler.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemHandler.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemHandler.cpp"
+              name="TaggedItemHandler.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemHandler.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemBase.h"
+              name="TaggedItemBase.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemBase.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemBase.cpp"
+              name="TaggedItemBase.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/TaggedItemBase.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Object.h"
+              name="Object.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Object.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Object.cpp"
+              name="Object.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Object.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/NamedObject.h"
+              name="NamedObject.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/NamedObject.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/NamedObject.cpp"
+              name="NamedObject.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/NamedObject.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Length.h"
+              name="Length.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Length.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Length.cpp"
+              name="Length.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/Length.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/IconSource.h"
+              name="IconSource.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/IconSource.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/IconSource.cpp"
+              name="IconSource.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/IconSource.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/DraggableObject.h"
+              name="DraggableObject.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/DraggableObject.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/DraggableObject.cpp"
+              name="DraggableObject.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/D3CKInterface/Source/DraggableObject.cpp"/>
+      </GROUP>
+      <GROUP name="RenderSkinLib">
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinViewComp.h"
+              name="SkinViewComp.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinViewComp.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinViewComp.cpp"
+              name="SkinViewComp.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinViewComp.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinKnob.h"
+              name="SkinKnob.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinKnob.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinKnob.cpp"
+              name="SkinKnob.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinKnob.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinGUI.h"
+              name="SkinGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinGUI.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinGUI.cpp"
+              name="SkinGUI.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinGUI.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompGUI.h"
+              name="SkinCompGUI.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompGUI.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompGUI.cpp"
+              name="SkinCompGUI.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompGUI.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompControl.h"
+              name="SkinCompControl.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompControl.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompControl.cpp"
+              name="SkinCompControl.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinCompControl.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinComp.h"
+              name="SkinComp.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinComp.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinComp.cpp"
+              name="SkinComp.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/SkinComp.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/Skin.h"
+              name="Skin.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/Skin.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/Skin.cpp"
+              name="Skin.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/Skin.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkinComp.h"
+              name="AudioProcessorSkinComp.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkinComp.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkinComp.cpp"
+              name="AudioProcessorSkinComp.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkinComp.cpp"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkin.h"
+              name="AudioProcessorSkin.h" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkin.h"/>
+        <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkin.cpp"
+              name="AudioProcessorSkin.cpp" compile="0" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source/AudioProcessorSkin.cpp"/>
+      </GROUP>
+    </GROUP>
+    <FILE name="icon.jpg" compile="0" resource="0" file="/Users/jms/www/test/products/RenderSkin/icon.jpg"
+          id="appIcon"/>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
@@ -104,8 +250,9 @@
                        isDebug="1" optimisation="1" targetName="RenderSkin" headerPath="&#10;/Users/jms/Development/audioD3CK/lib/FFTReal-2.11&#10;/Users/jms/Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;/Users/jms/Development/audioD3CK/source/D3CKCore/Source&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Source&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source"
                        libraryPath="/Users/jms/Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Debug&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Debug&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Debug"/>
         <CONFIGURATION name="Test" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="1" optimisation="3" targetName="RenderSkin" headerPath="/Users/jms/Development/audioD3CK/lib/FFTReal-2.11&#10;/Users/jms/Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;/Users/jms/Development/audioD3CK/source/D3CKCore/Source&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Source&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source"
-                       libraryPath="/Users/jms/Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Test&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Test&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Test"/>
+                       isDebug="0" optimisation="3" targetName="RenderSkin" headerPath="/Users/jms/Development/audioD3CK/lib/FFTReal-2.11&#10;/Users/jms/Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;/Users/jms/Development/audioD3CK/source/D3CKCore/Source&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Source&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source"
+                       libraryPath="/Users/jms/Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Test&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Test&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Test"
+                       customXcodeFlags="GCC_GENERATE_DEBUGGING_SYMBOLS=YES,COPY_PHASE_STRIP=NO"/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="10.4 SDK" osxArchitecture="64BitUniversal"
                        isDebug="0" optimisation="3" targetName="RenderSkin" headerPath="/Users/jms/Development/audioD3CK/lib/FFTReal-2.11&#10;/Users/jms/Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;/Users/jms/Development/audioD3CK/source/D3CKCore/Source&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Source&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Source"
                        libraryPath="/Users/jms/Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Release&#10;/Users/jms/Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Release&#10;/Users/jms/Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Release"/>
@@ -133,17 +280,21 @@
             vst3Folder="g://Development/audioD3CK/lib/VST3 SDK" aaxFolder="g://Development/audioD3CK/lib/AAX_SDK_2p1p1">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="1" optimisation="1" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Debug&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Debug&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Debug"
+                       isDebug="1" optimisation="1" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/VisualStudio2013/Debug&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/VisualStudio2013/Debug&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/VisualStudio2013/Debug"
                        headerPath="&#10;g://Development/audioD3CK/lib/FFTReal-2.11&#10;g://Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;g://Development/audioD3CK/source/D3CKCore/Source&#10;g://Development/audioD3CK/source/D3CKInterface/Source&#10;g://Development/audioD3CK/source/RenderSkinLib/Source"
                        useRuntimeLibDLL="0"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="3" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Release&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Release&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Release"
+        <CONFIGURATION name="Release32" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/VisualStudio2013/Release32&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/VisualStudio2013/Release32&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/VisualStudio2013/Release32"
                        headerPath="&#10;g://Development/audioD3CK/lib/FFTReal-2.11&#10;g://Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;&#10;g://Development/audioD3CK/source/D3CKCore/Source&#10;g://Development/audioD3CK/source/D3CKInterface/Source&#10;g://Development/audioD3CK/source/RenderSkinLib/Source"
                        useRuntimeLibDLL="0" postbuildCommand=""/>
-        <CONFIGURATION name="Release64" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="0" optimisation="3" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/MacOSX/build/Release64&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/MacOSX/build/Release64&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/MacOSX/build/Release64"
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="0" optimisation="3" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/VisualStudio2013/Release&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/VisualStudio2013/Release&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/VisualStudio2013/Release"
                        headerPath="&#10;g://Development/audioD3CK/lib/FFTReal-2.11&#10;g://Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;&#10;g://Development/audioD3CK/source/D3CKCore/Source&#10;g://Development/audioD3CK/source/D3CKInterface/Source&#10;g://Development/audioD3CK/source/RenderSkinLib/Source"
                        useRuntimeLibDLL="0" postbuildCommand=""/>
+        <CONFIGURATION name="Test" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="0" optimisation="3" targetName="RenderSkin" libraryPath="g://Development/audioD3CK/source/D3CKCore/Builds/VisualStudio2013/Test&#10;g://Development/audioD3CK/source/D3CKInterface/Builds/VisualStudio2013/Test&#10;g://Development/audioD3CK/source/RenderSkinLib/Builds/VisualStudio2013/Test"
+                       headerPath="&#10;g://Development/audioD3CK/lib/FFTReal-2.11&#10;g://Development/audioD3CK/lib/sqlite-amalgamation-3080500&#10;&#10;g://Development/audioD3CK/source/D3CKCore/Source&#10;g://Development/audioD3CK/source/D3CKInterface/Source&#10;g://Development/audioD3CK/source/RenderSkinLib/Source"
+                       useRuntimeLibDLL="0" postbuildCommand="" alwaysGenerateDebugSymbols="1"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_video" path="g://GIT/JUCE/modules"/>

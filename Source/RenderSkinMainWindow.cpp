@@ -25,3 +25,8 @@ void RenderSkinMainWindow::closeButtonPressed()
         JUCEApplication::quit();
     }
 }
+
+D3CKHistory* RenderSkinMainWindow::getHistory()const
+{
+    return this->app->getHistory();
+}

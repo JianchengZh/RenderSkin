@@ -1,5 +1,6 @@
 #pragma once
 #include "Skin.h"
+class RenderSkin;
 
 /**
  a subclass of skin adding methods to edit and save a skin
@@ -9,7 +10,7 @@ public Skin,
 public Value::Listener
 {
 public:
-    EditableSkin();
+    EditableSkin(RenderSkin* app);
     ~EditableSkin();
     
     juce_UseDebuggingNewOperator
@@ -39,12 +40,16 @@ public:
     void createSkin(const File& file, ImageFileFormat& format);
     
     const Array<Image>& getSourceImages() const;
+    RenderSkin* getApp()const;
     
     File getTargetPath() const;
     File getSourceImagePath()const;
     
     double getQuality()const;
     void setQuality(double quality);
+    
+    
+    void deleteSelectedComps(D3CKHistory* history);
     
     /**
      the index form the image stack to use as background
@@ -77,6 +82,7 @@ private:
      **/
     Array<Image> sourceImages;
 
+    WeakReference<RenderSkin> app;
     
     friend class SkinProps;
     WeakReference<EditableSkin>::Master masterReference;

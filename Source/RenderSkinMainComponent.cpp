@@ -8,6 +8,24 @@ tabs(TabbedButtonBar::TabsAtTop)
     this->app = app;
     this->addKeyListener(app->getKeyMappings());
     this->app->registerAllCommandsForTarget(this);
+    
+    const int cmd = ModifierKeys::commandModifier;
+    const int del = KeyPress::backspaceKey;
+    app->getKeyMappings()->addKeyPress(RenderSkin::undo, KeyPress('z',cmd,'z'));
+    app->getKeyMappings()->addKeyPress(RenderSkin::redo, KeyPress('z',cmd | ModifierKeys::shiftModifier,'Z'));
+    app->getKeyMappings()->addKeyPress(RenderSkin::removeItem, KeyPress(del,ModifierKeys(),0));
+    app->getKeyMappings()->addKeyPress(RenderSkin::open, KeyPress('o',cmd,0));
+    app->getKeyMappings()->addKeyPress(RenderSkin::newskin, KeyPress('n',cmd,0));
+    app->getKeyMappings()->addKeyPress(RenderSkin::newskin, KeyPress('n',cmd,0));
+    app->getKeyMappings()->addKeyPress(RenderSkin::save, KeyPress('s',cmd,0));
+    app->getKeyMappings()->addKeyPress(RenderSkin::quit, KeyPress('q',cmd,0));
+    
+    ScopedPointer<XmlElement> el = app->props.getUserSettings()->getXmlValue("keymap");
+    if(el)
+    {
+        app->getKeyMappings()->restoreFromXml(*el);
+    }
+    
     this->app->addChangeListener(this);
     
     this->addAndMakeVisible(&this->menu);
@@ -16,7 +34,6 @@ tabs(TabbedButtonBar::TabsAtTop)
     
     this->changeListenerCallback(this->app);
 }
-
 
 void RenderSkinMainComponent::changeListenerCallback(ChangeBroadcaster* obj)
 {
@@ -55,17 +72,30 @@ void RenderSkinMainComponent::getAllCommands (Array <CommandID>& commands)
     commands.add(RenderSkin::open);
     commands.add(RenderSkin::save);
     commands.add(RenderSkin::closeSkin);
+    commands.add(RenderSkin::quit);
     commands.add(RenderSkin::addComp);
-//    commands.add(RenderSkin::undo);
-//    commands.add(RenderSkin::redo);
-//    commands.add(RenderSkin::removeItem);
+    
+    commands.add(RenderSkin::undo);
+    commands.add(RenderSkin::redo);
+    commands.add(RenderSkin::removeItem);
+    
+    commands.add(RenderSkin::editKeyMappings);
+    
+    
+    
 }
 
 void RenderSkinMainComponent::getCommandInfo (CommandID commandID, ApplicationCommandInfo& result)
 {
+    const String skinName = this->app->getCurrentSkin() ? this->app->getCurrentSkin()->getName() : "skin";
     result.setActive(this->app->getCurrentSkin());
     switch(commandID)
     {
+        case RenderSkin::editKeyMappings:
+        {
+            result.setInfo("keyMap", "edit key mappings", "config", 0);
+            break;
+        }
         case RenderSkin::newskin:
         {
             result.setInfo("new","create new skin","file",0);
@@ -86,26 +116,34 @@ void RenderSkinMainComponent::getCommandInfo (CommandID commandID, ApplicationCo
             result.setActive(this->app->getCurrentSkin() && !this->app->getCurrentSkin()->isSaved());
             break;
         }
+            
+        case RenderSkin::quit:
+        {
+            result.setInfo("quit","quit RenderRkin","file",0);
+            break;
+        }
         case RenderSkin::closeSkin:
         {
-            result.setInfo("close skin","close skin","file",0);
+            result.setInfo("close skin","close "+skinName,"file",0);
             result.setActive(this->app->getCurrentSkin());
             break;
         }
         case RenderSkin::addComp:
         {
-            result.setInfo("add comp","addsa a comp","comps",0);
+            result.setInfo("add comp","adds a comp to "+skinName,"comps",0);
             result.setActive(this->app->getCurrentSkin());
             break;
         }
         case RenderSkin::undo:
         {
-            result.setInfo("undo","undo","edit",0);
+            result.setInfo("undo","undo: " + this->app->getHistory()->getUndoDescription(),"edit",0);
+            result.setActive(this->app->getHistory()->canUndo());
             break;
         }
         case RenderSkin::redo:
         {
-            result.setInfo("redo","redo","edit",0);
+            result.setInfo("redo","redo: " + this->app->getHistory()->getRedoDescription(),"edit",0);
+            result.setActive(this->app->getHistory()->canRedo());
             break;
         }
         case RenderSkin::removeItem:
@@ -120,6 +158,29 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
 {
     switch(info.commandID)
     {
+        case RenderSkin::undo:
+        {
+            this->app->getHistory()->undo();
+            break;
+        }
+        case RenderSkin::redo:
+        {
+            this->app->getHistory()->redo();
+            break;
+        }
+        case RenderSkin::editKeyMappings:
+        {
+            KeyMappingEditorComponent editor(*this->app->getKeyMappings(),false);
+            editor.centreWithSize(500, 500);
+            DialogWindow::showModalDialog("key map", &editor, this, Colours::white, true);
+            break;
+        }
+        case RenderSkin::removeItem:
+        {
+            D3CKHistory::beginNewTransaction("delete selected comps", this);
+            app->getCurrentSkin()->deleteSelectedComps(D3CKHistory::find(this));
+            break;
+        }
         case RenderSkin::newskin:
         {
             app->addSkin();
@@ -136,7 +197,7 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
         }
         case RenderSkin::closeSkin:
         {
-            if(AlertWindow::showOkCancelBox(AlertWindow::QuestionIcon,"close skin?","close skin?"))
+            if(AlertWindow::showOkCancelBox(AlertWindow::QuestionIcon,"close "+app->getCurrentSkin()->getName()+"?","close "+app->getCurrentSkin()->getName()+"?"))
             {
                 if(app->getCurrentSkin()->attemptToClose())
                 {
@@ -148,6 +209,11 @@ bool RenderSkinMainComponent::perform (const InvocationInfo& info)
         case RenderSkin::save:
         {
             app->getCurrentSkin()->save();
+            break;
+        }
+        case RenderSkin::quit:
+        {
+            app->attemptToClose();
             break;
         }
         case RenderSkin::addComp:

@@ -27,7 +27,10 @@ public:
         undo,
         redo,
         addComp,
-        removeItem
+        removeItem,
+        editKeyMappings,
+        exportSkin,
+        quit
     };
     
 	RenderSkin();
@@ -47,7 +50,7 @@ public:
 	void addSkin(const File& file = File::nonexistent);
     bool attemptToClose();
     
-
+    D3CKHistory* getHistory()const;
 
     
     Array<EditableSkin*> getOpenSkins()const;

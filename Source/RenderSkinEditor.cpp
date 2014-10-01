@@ -3,6 +3,7 @@
 #include "SkinPlacementRect.h"
 #include "EditableSkinComp.h"
 #include "SkinCompControllPlacementRect.h"
+#include "D3CKHistory.h"
 
 RenderSkinEditor::RenderSkinEditor(EditableSkin* skin):
 SkinViewComp(skin),
@@ -26,6 +27,26 @@ RenderSkinEditor::~RenderSkinEditor()
         skin->removeChangeListener(this);
     }
 }
+
+RenderSkin* RenderSkinEditor::getApp()const
+{
+    return this->skin->getApp();
+}
+
+bool RenderSkinEditor::keyPressed(const KeyPress& k)
+{
+    if(k.isKeyCode(KeyPress::deleteKey) || k.isKeyCode(KeyPress::backspaceKey))
+    {
+        for(int i =  skin->getComps().selectedItems.getNumSelected() ; -- i >= 0 ;)
+        {
+            ListItem* comp = skin->getComps().selectedItems.getSelectedItem(i);
+            comp->moveToTrash(true,D3CKHistory::beginNewTransaction("remove comps", this));
+        }
+        return true;
+    }
+    return false;
+}
+
 
 void RenderSkinEditor::findLassoItemsInArea (Array <ListItem*>& itemsFound, const Rectangle<int>& area)
 {

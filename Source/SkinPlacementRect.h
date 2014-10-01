@@ -18,12 +18,16 @@ public:
     
     virtual void changeListenerCallback(ChangeBroadcaster*obj) override;
     
+    bool keyPressed(const KeyPress& k) override;
+    
     void paint(Graphics& g)override;
     
     const Colour& getColour() const;
     bool isSelected() const;
     
 protected:
+    
+    bool selectionBool;
 	WeakReference<EditableSkinComp> comp;
     SafePointer<RenderSkinEditor> editor;
 };

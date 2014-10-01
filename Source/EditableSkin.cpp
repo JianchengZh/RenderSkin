@@ -1,8 +1,10 @@
 #include "EditableSkin.h"
 #include "EditableSkinComp.h"
+#include "RenderSkin.h"
 
-EditableSkin::EditableSkin()
+EditableSkin::EditableSkin(RenderSkin* app)
 {
+    this->app = app;
     setName("new skin");
     backgroundframe = 0;
     maskOpacity = 0;
@@ -26,6 +28,20 @@ void EditableSkin::loadFromXml(XmlElement *el)
     loadImages();
     
     Skin::loadFromXml(el);
+}
+
+RenderSkin* EditableSkin::getApp()const
+{
+    return this->app;
+}
+
+void EditableSkin::deleteSelectedComps(D3CKHistory* history)
+{
+    for(int i = this->comps.selectedItems.getNumSelected() ; -- i >= 0 ; )
+    {
+        ListItem* item = this->comps.selectedItems.getSelectedItem(i);
+        item->moveToTrash(history,history);
+    }
 }
 
 void EditableSkin::valueChanged (Value& value)
@@ -175,7 +191,7 @@ bool EditableSkin::attemptToClose()
 {
     if(!this->isSaved())
     {
-        int res = AlertWindow::showYesNoCancelBox(AlertWindow::QuestionIcon, "save changes to skin?", "save changes to skin?");
+        int res = AlertWindow::showYesNoCancelBox(AlertWindow::QuestionIcon, "save changes to "+this->getName()+"?", "save changes to "+ this->getName() +"?");
         if(res == 1)
         {
             return this->save();
@@ -206,7 +222,7 @@ void EditableSkin::produce()
 
 void EditableSkin::createSkin(const File& targetDir,ImageFileFormat& format)
 {
- 
+    
 	if(targetPath.create());
 	{
         const String skinFileName = "skin.d3ckskin";//this->getFile().getFileName();
@@ -234,31 +250,28 @@ void EditableSkin::createSkin(const File& targetDir,ImageFileFormat& format)
 			EditableSkinComp* c = dynamic_cast<EditableSkinComp*>(getComps().items.getUnchecked(i));
             jassert(c) //an editable skin should only hold editbale skin comps
 			
-            if(c->graphicArea.isEmpty())
+            if(!c->graphicArea.isEmpty() && c->getName().isNotEmpty())
             {
+                int x = c->graphicArea.getX();
+                int y = c->graphicArea.getY();
+                int h = c->graphicArea.getHeight();
+                int w = c->graphicArea.getWidth();
+                int len = c->getRange().getLength()+1;
+                Image img(Image::RGB, w, h* len ,true);
+                Graphics g(img);
+                
+                int len2 = c->getRange().getLength();
+                for(int im = 0 ; im <= len2 ; im++)
+                {
+                    Image si = sourceImages.getUnchecked(jlimit(0, sourceImages.size()-1,im+c->getRange().getStart()));
+                    g.drawImage(si,0,im*h,w,h,x,y,w,h);
+                }
+                File file = c->getStripFile(String((i+10)));
+                file.deleteFile();
+                FileOutputStream fo(file);
+                format.writeImageToStream(img,fo);
                 
             }
-            
-            int x = c->graphicArea.getX();
-			int y = c->graphicArea.getY();
-			int h = c->graphicArea.getHeight();
-			int w = c->graphicArea.getWidth();
-			int len = c->getRange().getLength()+1;
-			Image img(Image::RGB, w, h* len ,true);
-			Graphics g(img);
-            
-            
-			int len2 = c->getRange().getLength();
-			for(int im = 0 ; im <= len2 ; im++)
-			{
-                
-				Image si = sourceImages.getUnchecked(jlimit(0, sourceImages.size()-1,im+c->getRange().getStart()));
-				g.drawImage(si,0,im*h,w,h,x,y,w,h);
-			}
-			File file = c->getStripFile(String((i+10)));
-			file.deleteFile();
-			FileOutputStream fo(file);
-			format.writeImageToStream(img,fo);
             
 		}
 	}

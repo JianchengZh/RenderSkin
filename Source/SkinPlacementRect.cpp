@@ -3,6 +3,7 @@
 #include "EditableSkin.h"
 #include "SkinCompPropsGUI.h"
 #include "RenderSkinEditor.h"
+#include "RenderSkin.h"
 
 SkinPlacementRect::SkinPlacementRect(EditableSkinComp* comp,BoundsDriver* rect,RenderSkinEditor* editor ):
 PlacementRect(rect)
@@ -25,6 +26,16 @@ SkinPlacementRect::~SkinPlacementRect()
         this->comp->removeChangeListener(this);
     }
 };
+
+bool SkinPlacementRect::keyPressed(const KeyPress& k)
+{
+    if(k.isKeyCode(KeyPress::deleteKey) || k.isKeyCode(KeyPress::backspaceKey))
+    {
+        comp->moveToTrash(true,D3CKHistory::beginNewTransaction("remove comps", this));
+        return true;
+    }
+    return false;
+}
 
 void SkinPlacementRect::changeListenerCallback(ChangeBroadcaster*obj)
 {
@@ -59,12 +70,14 @@ bool SkinPlacementRect::isSelected() const
 
 void SkinPlacementRect::mouseDown(const MouseEvent& e)
 {
-    this->editor->getSkin()->getComps().selectedItems.selectOnly(this->comp);
+    this->selectionBool = this->editor->getSkin()->getComps().selectedItems.addToSelectionOnMouseDown(this->comp, e.mods);
     PlacementRect::mouseDown(e);
 }
 
 void SkinPlacementRect::mouseUp(const MouseEvent& e)
 {
+    this->editor->getSkin()->getComps().selectedItems.addToSelectionOnMouseUp(this->comp, e.mods, e.getDistanceFromDragStart(), this->selectionBool);
+    
 	PlacementRect::mouseUp(e);
     if(e.mods.isMiddleButtonDown())
     {
@@ -129,7 +142,7 @@ void SkinPlacementRect::mouseUp(const MouseEvent& e)
 		}
 		else if(res == 1)
 		{
-			comp->moveToTrash(true);
+			comp->moveToTrash(true,D3CKHistory::beginNewTransaction("remove comp", this));
 		}
 	}
 }

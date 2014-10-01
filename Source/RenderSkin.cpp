@@ -22,7 +22,7 @@ RenderSkin::RenderSkin()
             File skinFile(skinXml->getStringAttribute("path"));
             if(skinFile.existsAsFile())
             {
-                EditableSkin* skin = new EditableSkin();
+                EditableSkin* skin = new EditableSkin(this);
                 addSkin(skin);
                 skin->loadFromFile(skinFile);
             }
@@ -34,6 +34,10 @@ RenderSkin::RenderSkin()
 
 RenderSkin::~RenderSkin()
 {
+    ScopedPointer<XmlElement> el = this->getKeyMappings()->createXml(true);
+    props.getUserSettings()->setValue("keymap", el);
+    
+
     masterReference.clear();
 }
 
@@ -56,8 +60,6 @@ void RenderSkin::setCurrentSkin(EditableSkin* skin)
     this->currentSkin = skin;
 }
 
-
-
 bool RenderSkin::attemptToClose()
 {
     XmlElement el("workspace");
@@ -73,7 +75,6 @@ bool RenderSkin::attemptToClose()
         XmlElement* doc = new XmlElement("document");
         doc->setAttribute("path", f.getFullPathName());
         el.addChildElement(doc);
-        
     }
     
     props.getUserSettings()->setValue("workspace",&el);
@@ -92,6 +93,7 @@ PopupMenu RenderSkin::getMenuForIndex (int topLevelMenuIndex, const String& menu
     PopupMenu menu;
     for(int i = 0 ; i < cmds.size(); i++)
     {
+        
         menu.addCommandItem(this,cmds.getUnchecked(i));
     }
     return menu;
@@ -109,7 +111,11 @@ void RenderSkin::removeSkin(EditableSkin* skin)
     //skin->sendSynchronousChangeMessage(); // neede to inform the ui
     delete skinToDelete;
     this->sendChangeMessage();
-    
+}
+
+D3CKHistory* RenderSkin::getHistory()const
+{
+    return &const_cast<RenderSkin*>(this)->history;
 }
 
 void RenderSkin::addSkin(EditableSkin* skin)
@@ -122,7 +128,7 @@ void RenderSkin::addSkin(EditableSkin* skin)
 
 void RenderSkin::addSkin(const File& file)
 {
-    EditableSkin* skin = new EditableSkin();
+    EditableSkin* skin = new EditableSkin(this);
     addSkin(skin);
     skin->loadFromFile(file);
 }
