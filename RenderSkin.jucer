@@ -75,9 +75,6 @@
       <FILE id="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.cpp"
             name="EditableSkin.cpp" compile="1" resource="0" file="/Users/jms/Development/audioD3CK/source/RenderSkin/Source/EditableSkin.cpp"/>
     </GROUP>
-    <GROUP id="{2D71017E-37BB-56CE-A309-D389E15F48F1}" name="icons">
-      <FILE id="appIcon" name="icon.jpg" compile="0" resource="1" file="../../../../www/test/products/RenderSkin/icon.jpg"/>
-    </GROUP>
     <GROUP name="deps" id="xEmBri">
       <GROUP name="D3CKCore">
         <FILE id="/Users/jms/Development/audioD3CK/source/D3CKCore/Source/VirtualDragAndDropTarget.h"
